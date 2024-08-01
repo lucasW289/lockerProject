@@ -1,3 +1,4 @@
+/* Custom CSS for the login form */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0f2f5;
@@ -8,7 +9,7 @@ body {
     margin: 0;
 }
 
-.registration-container {
+.login-container {
     background: #ffffff;
     padding: 2.5rem;
     border-radius: 15px;
@@ -19,12 +20,12 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.registration-container:hover {
+.login-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
 }
 
-.registration-container h1 {
+.login-container h1 {
     margin-bottom: 1.5rem;
     color: #333;
     font-size: 1.8rem;

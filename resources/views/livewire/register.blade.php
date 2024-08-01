@@ -24,6 +24,9 @@
         <input type="hidden" wire:model="role_id" value="3">
         <button type="submit">Register</button>
     </form>
+    <div class="login-link">
+        <p>Already registered? <a href="{{ route('login') }}">Login</a></p>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

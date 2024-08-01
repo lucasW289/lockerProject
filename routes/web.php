@@ -1,20 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Livewire\UserDashboard;
+use App\Livewire\AdminDashboard;
+use App\Livewire\ModeratorDashboard;
 
-Route::get('/', function () {
-    return view('auth/register');
-});
+
+Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
+
+Route::view('/register',"auth/register")->name('register');
+
 Route::view('/login',"auth/login")->name('login');
 
-Route::group(['middleware' => ['role:1']], function () {
-    // Routes accessible only by primary admin
-});
-
-Route::group(['middleware' => ['role:2']], function () {
-    // Routes accessible only by administrators
-});
-
-Route::group(['middleware' => ['role:3']], function () {
-    // Routes accessible only by users
+Route::middleware('auth:sanctum')->group(function () {
+    Route::view('/admin/dashboard', "admin/admin-dashboard")->name('admin.dashboard');
+    Route::view('/moderator/dashboard', "moderator/moderator-dashboard")->name('moderator.dashboard');
+    Route::view('/dashboard', "user/user-dashboard")->name('user.dashboard');
 });
