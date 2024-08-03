@@ -18,23 +18,23 @@ class Login extends Component
     public function login()
     {
         $this->validate();
-    
+
         $credentials = [
             'email' => $this->email,
             'password' => $this->password,
         ];
-    
+
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = $user->createToken('YourAppName')->plainTextToken;
-    
+
+            // Store token in session
+            session(['token' => $token]);
+
             // Redirect with token as part of response
-            return response()->json([
-                'token' => $token,
-                'redirect' => route($user->role_id == 1 ? 'admin.dashboard' : ($user->role_id == 2 ? 'moderator.dashboard' : 'user.dashboard'))
-            ]);
+            return redirect()->route($user->role_id == 1 ? 'admin.dashboard' : ($user->role_id == 2 ? 'moderator.dashboard' : 'user.dashboard'));
         }
-    
+
         $this->addError('email', 'Unauthorized');
     }
 

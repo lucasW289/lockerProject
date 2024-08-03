@@ -1,0 +1,98 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Steps Navigation */
+.steps-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.steps-nav button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.steps-nav button.active {
+    background-color: #0056b3;
+}
+
+/* Package Cards */
+.packages-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+}
+.package-cards {
+    display: flex;
+    flex-wrap: nowrap; /* Prevents cards from wrapping to the next line */
+    overflow-x: auto; /* Adds horizontal scrollbar if cards overflow */
+    gap: 20px;
+    justify-content: flex-start;
+    
+    margin-top: 20px;
+    padding: 10px 0; /* Add padding for better alignment */
+  
+}
+
+.package-card {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    flex-shrink: 0; /* Prevents cards from shrinking */
+}
+
+.package-card.selected {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.package-card h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.package-card p {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.package-card button {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.package-card button:hover {
+    background-color: #218838;
+}
+
+/* Step Content */
+.step-content {
+    margin-top: 1rem;
+}
+
+/* Hidden Class */
+.hidden {
+    display: none;
+}
