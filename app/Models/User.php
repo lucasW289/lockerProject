@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function sepa()
+    {
+        return $this->hasOne(Sepa::class);
+    }
 }

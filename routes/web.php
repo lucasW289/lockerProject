@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::view('/dashboard', "moderator/moderator-dashboard")->name('moderator.dashboard');
     Route::view('/dashboard', "user/user-dashboard")->name('user.dashboard');
     Route::view('/rentlocker',"user/rent-locker")->name('rent-locker');
+    Route::view('/sepa-steps',"user/sepa-steps")->name('sepa-steps');
+
 
 });

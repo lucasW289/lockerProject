@@ -12,7 +12,7 @@ body {
 }
 
 .steps-nav button {
-    background-color: #007bff;
+    background-color: #007bff; /* Blue color for buttons */
     border: none;
     color: white;
     padding: 10px 20px;
@@ -21,27 +21,39 @@ body {
     transition: background-color 0.3s;
 }
 
+/* Active Step */
 .steps-nav button.active {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue for active step */
+    font-weight: bold; /* Bold text for active step */
+}
+
+/* Disabled Button */
+.steps-nav button.disabled,
+.steps-nav button:disabled {
+    background-color: #d6d6d6; /* Grey color for disabled buttons */
+    color: #a9a9a9; /* Grey text color for disabled buttons */
+    border: 1px solid #ccc; /* Light grey border for disabled buttons */
+    cursor: not-allowed; /* Not-allowed cursor for disabled buttons */
+    pointer-events: none; /* Prevent interaction */
+    opacity: 0.5; /* Semi-transparent for disabled buttons */
 }
 
 /* Package Cards */
-.packages-container{
+.packages-container {
     display: flex;
     justify-content: center;
     flex-direction: row;
     gap: 20px;
 }
+
 .package-cards {
     display: flex;
     flex-wrap: nowrap; /* Prevents cards from wrapping to the next line */
     overflow-x: auto; /* Adds horizontal scrollbar if cards overflow */
     gap: 20px;
     justify-content: flex-start;
-    
     margin-top: 20px;
     padding: 10px 0; /* Add padding for better alignment */
-  
 }
 
 .package-card {
@@ -58,8 +70,8 @@ body {
 }
 
 .package-card.selected {
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    border-color: #007bff; /* Blue border for selected card */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Blue glow for selected card */
 }
 
 .package-card h3 {
@@ -74,7 +86,7 @@ body {
 }
 
 .package-card button {
-    background-color: #28a745;
+    background-color: #28a745; /* Green color for buttons within package cards */
     border: none;
     color: white;
     padding: 10px 20px;
@@ -84,7 +96,7 @@ body {
 }
 
 .package-card button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Darker green on hover */
 }
 
 /* Step Content */
@@ -95,4 +107,48 @@ body {
 /* Hidden Class */
 .hidden {
     display: none;
+}
+/* Styles for the SEPA form */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
 }

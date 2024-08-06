@@ -1,0 +1,46 @@
+/* public/css/sepa-steps.css */
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.choices button {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.choices button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.step-content {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.form-group .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

@@ -34,12 +34,12 @@
     window.addEventListener('registration-success', () => {
         Swal.fire({
             title: 'Registration Successful!',
-            text: 'You will be redirected to the login page.',
+            text: 'You will be redirected to the dashboard.',
             icon: 'success',
             confirmButtonText: 'Okay'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '{{ route('login') }}';
+                window.location.href = '{{ route('user.dashboard') }}';
             }
         });
     });
