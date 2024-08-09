@@ -13,7 +13,7 @@
         <nav class="dashboard-nav">
             <a href="{{ url('/dashboard') }}">Dashboard</a> |
             <a href="{{ route('rent-locker') }}">Rent locker</a> |
-            <a href="{{ route('sepa-steps') }}">Sepa Payment</a>
+            <a href="{{ route('sepa.steps') }}">Sepa Payment</a>
 
         </nav>
 

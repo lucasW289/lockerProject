@@ -8,11 +8,7 @@ class Sepa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'full_name',
-        'email',
-        'iban',
-        'bic',
-    ];
+    protected $fillable = ['full_name', 'email', 'iban', 'bic', 'file_path', 'uploaded', 'verified'];
+
+    
 }

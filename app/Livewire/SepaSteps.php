@@ -22,11 +22,14 @@ class SepaSteps extends Component
     public $classes;
     public $sepaDataExists = false;
     public $sepaUploaded = false;
+    public $sepaVerified = false;
+
+    protected $listeners = ['saveSEPAData', 'confirmSEPAUpdate', 'resetSEPAData'];
 
     public function mount()
     {
         $this->packages = \App\Models\Package::all();
-        $this->classes = \App\Models\Classes::all(); // Use the correct model name
+        $this->classes = \App\Models\Classes::all();
         $user = auth()->user();
 
         if ($user->sepa) {
@@ -35,10 +38,8 @@ class SepaSteps extends Component
             $this->iban = $user->sepa->iban;
             $this->bic = $user->sepa->bic;
             $this->sepaDataExists = true;
-        }
-
-        if ($user->sepa && $user->sepa->sepa_form_path) {
-            $this->sepaUploaded = true;
+            $this->sepaUploaded = !empty($user->sepa->file_path);
+            $this->sepaVerified = $user->sepa->verified;
         }
     }
 
@@ -56,7 +57,20 @@ class SepaSteps extends Component
             'bic' => 'required|string|max:11',
         ]);
 
-        // Save SEPA data
+        if ($this->sepaDataExists) {
+            $this->dispatch('confirm-sepa-update', [
+                'full_name' => $this->full_name,
+                'email' => $this->email,
+                'iban' => $this->iban,
+                'bic' => $this->bic,
+            ]);
+        } else {
+            $this->saveSEPAData();
+        }
+    }
+
+    public function saveSEPAData()
+    {
         $user = auth()->user();
         $user->sepa()->updateOrCreate([], [
             'full_name' => $this->full_name,
@@ -66,49 +80,67 @@ class SepaSteps extends Component
         ]);
 
         $this->sepaDataExists = true;
+        $this->sepaUploaded = false; // Reset upload status
+        $this->sepaVerified = false; // Reset verification status
         $this->step = 4; // Redirect to download step after saving SEPA data
+        $this->dispatch('sepa-saved', ['message' => 'SEPA data saved successfully.\n Please download Sepa pdf for signature.']);
     }
 
-    public function generateSepaPdf()
+    public function confirmSEPAUpdate($data)
     {
-        $data = [
-            'full_name' => $this->full_name,
-            'email' => $this->email,
-            'iban' => $this->iban,
-            'bic' => $this->bic,
-        ];
-
-        $pdf = Pdf::loadView('user.sepa-pdf', $data);
-
-        return $pdf->download('sepa_form.pdf');
+        $this->full_name = $data['full_name'];
+        $this->email = $data['email'];
+        $this->iban = $data['iban'];
+        $this->bic = $data['bic'];
+        $this->saveSEPAData();
     }
 
     public function downloadExistingSepa()
     {
         if (!$this->sepaDataExists) {
-            session()->flash('error', 'No SEPA data available.');
+            session()->flash('error', 'No SEPA data available. Please fill out SEPA info first.');
             return;
         }
-
-        return $this->generateSepaPdf();
+    
+        return redirect()->route('sepa.download');
     }
-
+    
     public function uploadSepaForm()
     {
         $this->validate([
-            'sepaForm' => 'required|mimes:pdf|max:10240', // 10MB max
+            'sepaForm' => 'required|mimes:pdf|max:2048',
         ]);
-
-        $filePath = $this->sepaForm->store('sepa_forms');
-
-        // Save the file path to the user's SEPA data or another appropriate place
+    
+        if (!$this->sepaDataExists) {
+            session()->flash('error', 'No SEPA data available. Please fill out SEPA info first.');
+            return;
+        }
+    
+        $filePath = $this->sepaForm->store('sepa_forms', 'secure');
+    
         $user = auth()->user();
         $user->sepa()->updateOrCreate([], [
-            'sepa_form_path' => $filePath,
+            'file_path' => $filePath,
+            'uploaded' => true,
+            'verified' => 'Pending', // Set default status to Pending
         ]);
-
+    
         $this->sepaUploaded = true;
-        session()->flash('message', 'SEPA form uploaded successfully.');
+        $this->sepaVerified = 'Pending'; // Initialize as Pending
+        $this->reset('sepaForm');
+        $this->dispatch('sepa-uploaded', ['message' => 'SEPA form uploaded successfully.']);
+    }
+    
+
+    public function resetSEPAData()
+    {
+        $this->full_name = '';
+        $this->email = '';
+        $this->iban = '';
+        $this->bic = '';
+        $this->sepaDataExists = false;
+        $this->sepaUploaded = false;
+        $this->sepaVerified = false;
     }
 
     public function render()
