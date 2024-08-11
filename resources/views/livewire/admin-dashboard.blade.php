@@ -46,7 +46,7 @@
                 <!-- Total Users -->
                 <div
                     class="group bg-[#0275d8] p-5 rounded-lg shadow-lg transition-transform  cursor-pointer hover:translate-y-1 hover:shadow-lg">
-                    <p class="text-white text-2xl">20</p>
+                    <p class="text-white text-2xl">{{ $totalUserCount }}</p>
                     <p class="text-white text-sm">Total Users</p>
                     <svg xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"
                         height="36" width="36" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -63,7 +63,7 @@
                 <!-- Pending Sepa -->
                 <div
                     class="group bg-[#f0ad4e] p-5 rounded-lg shadow-lg transition-transform  cursor-pointer hover:translate-y-1 hover:shadow-lg">
-                    <p class="text-white text-2xl">20</p>
+                    <p class="text-white text-2xl">{{ $sepaPendingCount }}</p>
                     <p class="text-white text-sm">Pending Sepa</p>
                     <svg xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"
                         height="36" width="36" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -80,7 +80,7 @@
                 <!-- Total Locker -->
                 <div
                     class="group bg-[#5bc0de] p-5 rounded-lg shadow-lg transition-transform  cursor-pointer hover:translate-y-1 hover:shadow-lg">
-                    <p class="text-white text-2xl">200</p>
+                    <p class="text-white text-2xl">{{ $totalLockersCount }}</p>
                     <p class="text-white text-sm">Total Lockers</p>
                     <svg xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"
                         height="36" width="36" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -97,7 +97,7 @@
                 <!-- Available Lockers -->
                 <div
                     class="group bg-[#5cb85c] p-5 rounded-lg shadow-lg transition-transform  cursor-pointer hover:translate-y-1 hover:shadow-lg">
-                    <p class="text-white text-2xl">20</p>
+                    <p class="text-white text-2xl">{{ $availableLockersCount }}</p>
                     <p class="text-white text-sm">Available Lockers</p>
                     <svg xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"
                         height="36" width="36" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -114,7 +114,7 @@
                 <!-- Lockers in Use -->
                 <div
                     class="group bg-[#d9534f] p-5 rounded-lg shadow-lg transition-transform  cursor-pointer hover:translate-y-1 hover:shadow-lg">
-                    <p class="text-white text-2xl">20</p>
+                    <p class="text-white text-2xl">{{ $lockersInUseCount }}</p>
                     <p class="text-white text-sm"> Lockers In Use</p>
                     <svg xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"
                         height="36" width="36" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -131,7 +131,7 @@
                 <!-- Lockers Out of Service -->
                 <div
                     class="group bg-[gray] p-5 rounded-lg shadow-lg transition-transform  cursor-pointer hover:translate-y-1 hover:shadow-lg">
-                    <p class="text-white text-2xl">20</p>
+                    <p class="text-white text-2xl">{{ $lockersOutOfServiceCount }}</p>
                     <p class="text-white text-sm"> Lockers Out of Service</p>
                     <svg xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"
                         height="36" width="36" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"

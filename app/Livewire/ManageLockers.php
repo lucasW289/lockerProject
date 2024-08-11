@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class ManageLockers extends Component
 {
     use WithPagination;
+    public $search = '';
+    public $buildingFilter = '';
+    public $floorFilter = '';
+    public $statusFilter = '';
 
     public $locker_id;
     public $locker_name;
@@ -17,10 +21,25 @@ class ManageLockers extends Component
     public $status;
     public $selectedLocker;
     public $user;
-    public $search = '';
+
     public $sortField = 'id';
     public $sortDirection = 'asc';
+    public function logout()
+    {
+        // For Sanctum, log out the user and invalidate their session
+        Auth::guard('web')->logout(); // Use 'web' guard for session-based authentication
 
+        // Optionally invalidate the user's API tokens
+        $user = Auth::user();
+        if ($user) {
+            $user->tokens()->delete(); // Delete all tokens for the user
+        }
+
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect()->route('login'); // Redirect to the login page
+    }
     protected $rules = [
         'locker_name' => 'required|string|max:255',
         'building'    => 'required|string|max:255',
@@ -125,23 +144,48 @@ class ManageLockers extends Component
     }
 
     
+    public function applyFilters()
+    {
+        // This method can be used to trigger any additional actions if needed
+        // For example, you can add custom logic to reset or validate filters
+        $this->resetPage(); // Reset pagination to the first page
+    }
+    public function resetFilters()
+    {
+        // Reset filter properties to default values
+        $this->search = '';
+        $this->buildingFilter = '';
+        $this->floorFilter = '';
+        $this->statusFilter = '';
+
+        // Optionally, you can reset pagination here as well
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $lockers = Locker::query()
-            ->where('locker_name', 'like', '%'.$this->search.'%')
-            ->where(function ($query) {
-                if ($this->building) {
-                    $query->where('building', 'like', '%'.$this->building.'%');
-                }
-                if ($this->floor) {
-                    $query->where('floor', 'like', '%'.$this->floor.'%');
-                }
-                if ($this->status) {
-                    $query->where('status', $this->status);
-                }
-            })
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(10);
+        $query = Locker::query();
+
+        // Apply filters to the query
+        if ($this->search) {
+            $query->where('locker_name', 'like', '%'.preg_replace('/\s+/', '%', $this->search).'%');
+        }
+
+        if ($this->buildingFilter) {
+            $query->where('building', 'like', '%'.$this->buildingFilter.'%');
+        }
+
+        if ($this->floorFilter) {
+            $query->where('floor', 'like', '%'.$this->floorFilter.'%');
+        }
+
+        if ($this->statusFilter) {
+            $query->where('status', 'like', '%'.$this->statusFilter.'%');
+        }
+
+        // Optional: Sorting and pagination
+        $lockers = $query->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(6);
 
         return view('livewire.manage-lockers', [
             'lockers' => $lockers,
