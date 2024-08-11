@@ -7,5 +7,5 @@
 @endsection
 
 @section('content')
-    @livewire('admin-dashboard')
+    @livewire('manage-lockers')
 @endsection

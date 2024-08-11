@@ -17,8 +17,23 @@ class UserDashboard extends Component
         {
             $this->user = Auth::user();
         }
+    }
 
+    public function logout()
+    {
+        // For Sanctum, log out the user and invalidate their session
+        Auth::guard('web')->logout(); // Use 'web' guard for session-based authentication
 
+        // Optionally invalidate the user's API tokens
+        $user = Auth::user();
+        if ($user) {
+            $user->tokens()->delete(); // Delete all tokens for the user
+        }
+
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect()->route('login'); // Redirect to the login page
     }
 
     public function render()

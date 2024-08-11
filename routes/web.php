@@ -20,11 +20,11 @@ Route::view('/register',"auth/register")->name('register');
 Route::view('/login',"auth/login")->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::view('/dashboard', "admin/admin-dashboard")->name('admin.dashboard');
-    Route::view('/dashboard', "moderator/moderator-dashboard")->name('moderator.dashboard');
-    Route::view('/dashboard', "user/user-dashboard")->name('user.dashboard');
+    Route::view('/admin-dashboard', "admin/admin-dashboard")->name('admin.dashboard');
+    Route::view('/moderator-dashboard', "moderator/moderator-dashboard")->name('moderator.dashboard');
+    Route::view('/user-dashboard', "user/user-dashboard")->name('user.dashboard');
     Route::view('/rentlocker',"user/rent-locker")->name('rent-locker');
     Route::view('/sepa-steps',"user/sepa-steps")->name('sepa.steps');
-
+    Route::view('/manage-lockers',"admin/manage-lockers")->name('manage.lockers');
 
 });
