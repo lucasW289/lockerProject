@@ -116,7 +116,7 @@ class SepaSteps extends Component
             return;
         }
     
-        $filePath = $this->sepaForm->store('sepa_forms', 'secure');
+        $filePath = $this->sepaForm->store('sepa_forms', 'public');
     
         $user = auth()->user();
         $user->sepa()->updateOrCreate([], [

@@ -31,8 +31,8 @@
     <nav class="dashboard-nav flex space-x-4 mb-8">
         <a href="{{ route('admin.dashboard') }}" class="text-blue-600 hover:text-blue-800 font-semibold">Dashboard</a>
         <a href="{{route('manage.lockers')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Lockers</a>
-        <a href="" class="text-blue-600 hover:text-blue-800 font-semibold">Assign Locker</a>
-        <a href="" class="text-blue-600 hover:text-blue-800 font-semibold">User Sepa</a>
+        <a href="{{route('assign.locker')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Assign Locker</a>
+        <a href="{{route('manage.sepa')}}" class="text-blue-600 hover:text-blue-800 font-semibold">User Sepa</a>
         <a href="" class="text-blue-600 hover:text-blue-800 font-semibold">Settings</a>
     </nav>
 

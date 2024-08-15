@@ -25,4 +25,15 @@ class Child extends Model
     {
         return $this->belongsTo(User::class);
     }
+    // In app/Models/Child.php
+
+public function locker()
+{
+    return $this->belongsTo(Locker::class);
+}
+public function class()
+{
+    return $this->belongsTo(Classes::class, 'class_id');
+
+}
 }
