@@ -15,5 +15,11 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
+// In Sepa.php model
+public function child()
+{
+    return $this->belongsTo(Child::class);
+}
+
 
 }

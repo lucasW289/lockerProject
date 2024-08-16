@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center bg-gray-600 text-white p-6 rounded-lg shadow-lg">
         <div>
             <h1 class="text-4xl font-bold">Admin Dashboard</h1>
-            <p class="text-2xl mt-2">Welcome back, {{ $user->name }}!</p>
+            
         </div>
         <div class="relative group">
             <button wire:click="logout()"

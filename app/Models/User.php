@@ -54,4 +54,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Sepa::class);
     }
+    public function children()
+    {
+        return $this->hasMany(Child::class);
+    }
 }

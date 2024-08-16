@@ -14,6 +14,7 @@ class Child extends Model
         'user_id',
         'package_id',
         'class_id', // Add this line
+        'locker_id'
     ];
 
     public function package()
@@ -35,5 +36,9 @@ public function class()
 {
     return $this->belongsTo(Classes::class, 'class_id');
 
+}
+public function sepa()
+{
+    return $this->hasOne(Sepa::class); // Adjust if necessary based on your setup
 }
 }
