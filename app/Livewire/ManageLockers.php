@@ -100,24 +100,20 @@ class ManageLockers extends Component
         session()->flash('message', 'Locker added successfully!');
     }
 
-    public function updateLocker()
+    public function updateLocker($id, $data)
     {
-        $this->validate();
-
-        $locker = Locker::find($this->locker_id);
-
+        $locker = Locker::find($id);
+    
         if ($locker) {
-            $locker->update([
-                'locker_name' => $this->locker_name,
-                'building'    => $this->building,
-                'floor'       => $this->floor,
-                'status'      => $this->status,
-            ]);
-
-            session()->flash('message', 'Locker updated successfully!');
-            $this->reset();
+            $locker->locker_name = $data['locker_name'];
+            $locker->building = $data['building'];
+            $locker->floor = $data['floor'];
+            $locker->status = $data['status'];
+            $locker->save();
+    
+            session()->flash('message', 'Locker updated successfully.');
         } else {
-            session()->flash('error', 'Locker not found!');
+            session()->flash('error', 'Locker not found.');
         }
     }
 

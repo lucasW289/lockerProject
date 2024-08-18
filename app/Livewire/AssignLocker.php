@@ -5,6 +5,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Child;
 use App\Models\Locker;
+use Illuminate\Support\Facades\Auth;
 
 class AssignLocker extends Component
 {
@@ -45,6 +46,12 @@ class AssignLocker extends Component
         $this->selectedChildId = $childId;
         $this->showLockerSelection = true;
         $this->lockerSearchTerm = ''; // Clear search term when starting locker assignment
+    }
+    public function mount()
+    {
+        if (Auth::user()->role_id !== 1) {
+            abort(403); // Forbidden
+        }
     }
 
     public function assignLocker($lockerId)
@@ -110,5 +117,22 @@ class AssignLocker extends Component
         }
 
         return collect(); // Return an empty collection if locker selection is not active
+    }
+
+    public function logout()
+    {
+        // For Sanctum, log out the user and invalidate their session
+        Auth::guard('web')->logout(); // Use 'web' guard for session-based authentication
+
+        // Optionally invalidate the user's API tokens
+        $user = Auth::user();
+        if ($user) {
+            $user->tokens()->delete(); // Delete all tokens for the user
+        }
+
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect()->route('login'); // Redirect to the login page
     }
 }

@@ -1,10 +1,10 @@
-<div class="container mx-auto px-4 py-8">
+<div class="status-check-container bg-white p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-lg shadow-lg max-w-7xl mx-auto my-16 border border-gray-200 min-h-[800px] flex flex-col justify-between">
     <!-- Admin Dashboard Header -->
     <header class="dashboard-header mb-8">
         <div class="flex justify-between items-center bg-gray-600 text-white p-6 rounded-lg shadow-lg">
             <div>
                 <h1 class="text-4xl font-bold">Admin Dashboard</h1>
-                <p class="text-2xl mt-2">Welcome back, {{ $user->name }}!</p>
+                
             </div>
             <div class="relative group">
                 <button wire:click="logout()"
@@ -28,12 +28,14 @@
     </header>
 
     <!-- Admin Dashboard Navigation -->
-    <nav class="dashboard-nav flex space-x-4 mb-8">
-        <a href="{{ route('admin.dashboard') }}" class="text-blue-600 hover:text-blue-800 font-semibold">Dashboard</a>
-        <a href="{{route('manage.lockers')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Lockers</a>
-        <a href="{{route('assign.locker')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Assign Locker</a>
-        <a href="{{route('manage.sepa')}}" class="text-blue-600 hover:text-blue-800 font-semibold">User Sepa</a>
-        <a href="" class="text-blue-600 hover:text-blue-800 font-semibold">Settings</a>
+    <nav class="dashboard-nav mb-8">
+        <div class="overflow-x-auto">
+            <a href="{{ route('admin.dashboard') }}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Dashboard</a> |
+            <a href="{{route('manage.lockers')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Manage Lockers</a> |
+            <a href="{{route('assign.locker')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Assign Locker</a> |
+            <a href="{{route('manage.sepa')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">User Sepa</a> |
+            <a href="{{route('manage.class')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Classes</a>
+        </div>
     </nav>
 
     <!-- Main Content -->

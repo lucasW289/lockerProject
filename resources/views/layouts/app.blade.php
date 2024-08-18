@@ -10,7 +10,7 @@
     @livewireStyles
     @yield('styles')
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
     @include('components.header')
 
     <div class="container">
@@ -23,3 +23,5 @@
     @livewireScripts
 </body>
 </html>
+<script src="https://cdn.tailwindcss.com"></script>
+

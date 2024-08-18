@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Sepa;
+use Illuminate\Support\Facades\Auth;
+
 
 class ManageSepa extends Component
 {
@@ -17,9 +19,27 @@ class ManageSepa extends Component
 
     public function mount()
     {
+        if (Auth::user()->role_id !== 1) {
+            abort(403); // Forbidden
+        }
         $this->sepas = Sepa::all(); // Fetch all SEPA records
     }
+    public function logout()
+    {
+        // For Sanctum, log out the user and invalidate their session
+        Auth::guard('web')->logout(); // Use 'web' guard for session-based authentication
 
+        // Optionally invalidate the user's API tokens
+        $user = Auth::user();
+        if ($user) {
+            $user->tokens()->delete(); // Delete all tokens for the user
+        }
+
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect()->route('login'); // Redirect to the login page
+    }
     public function selectSepa($id)
     {
         $this->selectedSepa = Sepa::find($id);

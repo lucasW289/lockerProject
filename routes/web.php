@@ -25,8 +25,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::view('/user-dashboard', "user/user-dashboard")->name('user.dashboard');
     Route::view('/rentlocker',"user/rent-locker")->name('rent-locker');
     Route::view('/sepa-steps',"user/sepa-steps")->name('sepa.steps');
+    Route::view('/check-status',"user/user-check-status")->name('check.status');
+
     Route::view('/manage-lockers',"admin/manage-lockers")->name('manage.lockers');
     Route::view('/assign-locker',"admin/assign-locker")->name('assign.locker');
+    Route::view('/manage-classes',"admin/manage-classes")->name('manage.class');
 
     Route::view('/manage-sepa',"admin/manage-sepa")->name('manage.sepa');
 
