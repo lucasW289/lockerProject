@@ -1,10 +1,11 @@
-<div class="status-check-container bg-white p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-lg shadow-lg max-w-7xl mx-auto my-16 border border-gray-200 min-h-[800px] flex flex-col justify-between">
+<div
+    class="status-check-container bg-white p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-lg shadow-lg max-w-7xl mx-auto my-16 border border-gray-200 min-h-[800px] flex flex-col justify-between">
     <!-- Admin Dashboard Header -->
     <header class="dashboard-header mb-8">
         <div class="flex justify-between items-center bg-gray-600 text-white p-6 rounded-lg shadow-lg">
             <div>
                 <h1 class="text-4xl font-bold">Admin Dashboard</h1>
-                
+
             </div>
             <div class="relative group">
                 <button wire:click="logout()"
@@ -30,11 +31,16 @@
     <!-- Admin Dashboard Navigation -->
     <nav class="dashboard-nav mb-8">
         <div class="overflow-x-auto">
-            <a href="{{ route('admin.dashboard') }}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Dashboard</a> |
-            <a href="{{route('manage.lockers')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Manage Lockers</a> |
-            <a href="{{route('assign.locker')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Assign Locker</a> |
-            <a href="{{route('manage.sepa')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">User Sepa</a> |
-            <a href="{{route('manage.class')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Classes</a>
+            <a href="{{ route('admin.dashboard') }}"
+                class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Dashboard</a> |
+            <a href="{{ route('manage.lockers') }}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Manage
+                Lockers</a> |
+            <a href="{{ route('assign.locker') }}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Assign
+                Locker</a> |
+            <a href="{{ route('manage.sepa') }}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">User
+                Sepa</a> |
+            <a href="{{ route('manage.class') }}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage
+                Classes</a>
         </div>
     </nav>
 
@@ -58,40 +64,27 @@
         <form wire:submit.prevent="storeClass">
             <div class="mb-4">
                 <label for="className" class="block text-sm font-medium text-gray-700">Class Name</label>
-                <input
-                    type="text"
-                    id="className"
-                    wire:model.lazy="className"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                >
-                @error('className') 
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span> 
+                <input type="text" id="className" wire:model.lazy="className"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+                @error('className')
+                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
                 <label for="building" class="block text-sm font-medium text-gray-700">Building</label>
-                <input
-                    type="text"
-                    id="building"
-                    wire:model.lazy="building"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                >
-                @error('building') 
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span> 
+                <input type="text" id="building" wire:model.lazy="building"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+                @error('building')
+                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
             <div class="flex flex-col sm:flex-row sm:space-x-2">
-                <button
-                    type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                >
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                     {{ $editing ? 'Update Class' : 'Add Class' }}
                 </button>
-                <button
-                    type="button"
-                    wire:click="resetFields"
-                    class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 mt-2 sm:mt-0"
-                >
+                <button type="button" wire:click="resetFields"
+                    class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 mt-2 sm:mt-0">
                     Cancel
                 </button>
             </div>
@@ -103,29 +96,29 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-100">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Building</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class
+                        Name</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Building
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions
+                    </th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($classes as $class)
+                @foreach ($classes as $class)
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $class->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $class->building }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex space-x-2">
-                            <button
-                                wire:click="editClass({{ $class->id }})"
-                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
-                            >
+                            <button wire:click="editClass({{ $class->id }})"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">
                                 Edit
                             </button>
-                            <button
-                                wire:click="deleteClass({{ $class->id }})"
-                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-                            >
+                            <button onclick="confirmDeleteClass({{ $class->id }})"
+                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
                                 Delete
                             </button>
+
                         </td>
                     </tr>
                 @endforeach
@@ -135,3 +128,22 @@
 </div>
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    function confirmDeleteClass(classId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Deleting this class will also delete all associated students. This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                @this.call('deleteClass', classId);
+            }
+        });
+    }
+</script>
+

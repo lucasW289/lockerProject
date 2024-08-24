@@ -75,41 +75,26 @@ class ManageClasses extends Component
         $this->editing = true;
     }
 
-    public function deleteClass($id)
+    public function deleteClass($classId)
     {
-        \DB::transaction(function () use ($id) {
-            // Find and delete the class
-            $class = Classes::find($id);
+        $class = Classes::find($classId);
+        
+        if ($class) {
+            // Delete associated students if needed
+            $class->delete();
     
-            if ($class) {
-                // Get all children associated with this class
-                $children = \DB::table('children')
-                    ->where('class_id', $id)
-                    ->get();
+            // Flash message
+            session()->flash('message', 'Class and associated students deleted successfully.');
+        } else {
+            session()->flash('error', 'Class not found.');
+        }
     
-                // Set locker_id to null for children and get locker_ids
-                $lockerIds = $children->pluck('locker_id')->filter();
-    
-                \DB::table('children')
-                    ->where('class_id', $id)
-                    ->update(['locker_id' => null]);
-    
-                // Mark lockers as available
-                \DB::table('lockers')
-                    ->whereIn('id', $lockerIds)
-                    ->update(['status' => 'available']);
-    
-                // Delete the class
-                $class->delete();
-    
-                // Flash message
-                session()->flash('message', 'Class deleted successfully!');
-            }
-        });
-    
-        // Redirect to the manage classes route
+        // Livewire should re-render automatically
         return redirect()->route('manage.class');
+
     }
+    
+
     
 
     public function resetFields()
