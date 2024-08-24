@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Livewire\UserDashboard;
 use App\Livewire\AdminDashboard;
 use App\Livewire\ModeratorDashboard;
+use App\Http\Livewire\AddPackagePlan;
 
 use App\Http\Controllers\SepaController;
 
@@ -30,7 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::view('/manage-lockers',"admin/manage-lockers")->name('manage.lockers');
     Route::view('/assign-locker',"admin/assign-locker")->name('assign.locker');
     Route::view('/manage-classes',"admin/manage-classes")->name('manage.class');
-
+    Route::view('/manage-package-plan',"admin/add-package-plan")->name('add.package');
     Route::view('/manage-sepa',"admin/manage-sepa")->name('manage.sepa');
 
 });

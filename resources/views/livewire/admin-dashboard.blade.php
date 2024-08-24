@@ -34,7 +34,9 @@
             <a href="{{route('manage.lockers')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Manage Lockers</a> |
             <a href="{{route('assign.locker')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Assign Locker</a> |
             <a href="{{route('manage.sepa')}}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">User Sepa</a> |
-            <a href="{{route('manage.class')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Classes</a>
+            <a href="{{route('manage.class')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Classes</a> |
+            <a href="{{route('add.package')}}" class="text-blue-600 hover:text-blue-800 font-semibold">Manage Package Plans</a>
+
         </div>
     </nav>
 
